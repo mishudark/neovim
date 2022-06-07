@@ -48,6 +48,9 @@ use 'ahmedkhalf/project.nvim'
 use 'neovim/nvim-lspconfig'
 use 'williamboman/nvim-lsp-installer'
 
+-- Lint
+use 'dense-analysis/ale'
+
 -- Go
 use 'fatih/vim-go'
 
@@ -74,7 +77,8 @@ use 'hrsh7th/cmp-nvim-lsp'
 use 'hrsh7th/cmp-nvim-lua'
 
 -- Tresitter
-use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+use 'nvim-treesitter/nvim-treesitter'
+use 'nvim-treesitter/nvim-treesitter-context'
 use 'nvim-treesitter/nvim-treesitter-textobjects'
 use 'SmiteshP/nvim-gps'
 
