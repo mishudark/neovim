@@ -67,3 +67,10 @@ lsputils.clients['gopls'].setup {
         lsputils.default_on_attach(client, bufnr)
     end
 }
+
+
+lsputils.clients['tsserver'].setup {
+    on_attach = function(client, bufnr)
+        lsputils.default_on_attach(client, bufnr)
+    end
+}
