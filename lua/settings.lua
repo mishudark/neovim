@@ -13,6 +13,8 @@ vim.g.maplocalleader = ','
 -- Set encoding
 opt.encoding = 'utf-8'
 
+opt.matchpairs = { '(:)', '{:}', '[:]', '<:>' }
+
 -- Backups
 opt.backup = false
 opt.swapfile = false
