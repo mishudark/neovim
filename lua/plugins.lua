@@ -82,7 +82,9 @@ use 'nvim-treesitter/nvim-treesitter'
 use 'nvim-treesitter/nvim-treesitter-context'
 use 'nvim-treesitter/nvim-treesitter-textobjects'
 use 'SmiteshP/nvim-gps'
+use 'windwp/nvim-ts-autotag'
 
 -- Tools
 use { 'feline-nvim/feline.nvim', requires = 'kyazdani42/nvim-web-devicons' }
 use 'famiu/bufdelete.nvim'
+use 'rcarriga/nvim-notify'

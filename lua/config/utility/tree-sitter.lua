@@ -11,6 +11,9 @@ require('nvim-treesitter.configs').setup {
         'typescript',
         'tsx',
     },
+    autotag = {
+        enable = true
+    },
     highlight = {
         enable = true,
         disable = {},
