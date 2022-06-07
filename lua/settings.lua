@@ -28,10 +28,11 @@ opt.grepprg = 'rg --vimgrep --smart-case'
 opt.wildmode = { 'longest', 'list', 'full' }
 
 -- Enable mouse support
-opt.mouse = 'a'
+opt.mouse = ''
 
 -- Persistent undo
 opt.undofile = true
+
 
 -- Use global statusline
 opt.laststatus = 3
