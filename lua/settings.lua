@@ -13,6 +13,11 @@ vim.g.maplocalleader = ','
 -- Set encoding
 opt.encoding = 'utf-8'
 
+-- Backups
+opt.backup = false
+opt.swapfile = false
+opt.writebackup = false
+
 -- Default grep command
 if fn.executable('rg') == 0 then
     vim.api.nvim_err_writeln(
