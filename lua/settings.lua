@@ -31,8 +31,9 @@ opt.grepprg = 'rg --vimgrep --smart-case'
 
 --- Wildmenu
 opt.wildmode = { 'longest', 'list', 'full' }
+opt.wildignore = opt.wildignore + { '*/node_modules/*', '*/.git/*', '*/vendor/*' }
 
--- Enable mouse support
+-- Disable mouse support
 opt.mouse = ''
 
 -- Persistent undo
