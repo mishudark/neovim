@@ -9,3 +9,5 @@ require('config.utility.null-ls')
 
 -- Auto-pairs
 require('nvim-autopairs').setup{}
+-- leap easy motion
+require('leap').set_default_keymaps()

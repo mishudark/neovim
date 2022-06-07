@@ -56,7 +56,7 @@ use 'jose-elias-alvarez/null-ls.nvim'
 use 'fatih/vim-go'
 
 -- navigation
-use 'ggandor/lightspeed.nvim'
+use 'ggandor/leap.nvim'
 
 -- Telescope
 use {
