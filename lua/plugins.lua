@@ -48,10 +48,6 @@ use 'ahmedkhalf/project.nvim'
 use 'neovim/nvim-lspconfig'
 use 'williamboman/nvim-lsp-installer'
 
--- Lint
-use 'dense-analysis/ale'
-use 'jose-elias-alvarez/null-ls.nvim'
-
 -- Go
 use 'fatih/vim-go'
 
