@@ -10,6 +10,7 @@ require('nvim-treesitter.configs').setup {
         'javascript',
         'typescript',
         'tsx',
+        'solidity',
     },
     autotag = {
         enable = true

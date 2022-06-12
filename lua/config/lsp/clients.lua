@@ -74,3 +74,6 @@ lsputils.clients['tsserver'].setup {
         lsputils.default_on_attach(client, bufnr)
     end
 }
+
+lsputils.clients['solidity_ls'].setup {}
+
