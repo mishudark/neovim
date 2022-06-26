@@ -20,6 +20,14 @@ opt.backup = false
 opt.swapfile = false
 opt.writebackup = false
 
+-- indentation
+vim.g.shiftwidth = 2
+vim.g.softtabstop = 2
+vim.g.expandtab = true
+vim.g.autoindent = true
+vim.g.smartindent = true
+vim.g.tabstop = 2
+
 -- Default grep command
 if fn.executable('rg') == 0 then
     vim.api.nvim_err_writeln(

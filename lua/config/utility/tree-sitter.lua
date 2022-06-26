@@ -1,6 +1,8 @@
 -- Tree-sitter
 require('nvim-treesitter.configs').setup {
     ensure_installed = {
+        'css',
+        'norg',
         'go',
         'java',
         'python',
