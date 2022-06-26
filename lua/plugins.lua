@@ -82,38 +82,8 @@ use 'windwp/nvim-ts-autotag'
 
 -- Org
 use {
-    "nvim-neorg/neorg",
-    ft = "norg",
-    after = "nvim-treesitter",
-    config = function()
-        require('neorg').setup {
-            load = {
-                ["core.defaults"] = {},
-                ["core.norg.dirman"] = {
-                    config = {
-                        workspaces = {
-                            work = "~/notes/work",
-                            home = "~/notes/home",
-                        }
-                    }
-                }
-            }
-        }
-    end,
-    requires = "nvim-lua/plenary.nvim"
-}
-
-use {
     'wthollingsworth/pomodoro.nvim',
     requires = 'MunifTanjim/nui.nvim',
-    config = function()
-        require('pomodoro').setup({
-            time_work = 25,
-            time_break_short = 5,
-            time_break_long = 20,
-            timers_to_long_break = 4
-        })
-    end
 }
 
 -- Tools
