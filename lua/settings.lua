@@ -21,12 +21,23 @@ opt.swapfile = false
 opt.writebackup = false
 
 -- indentation
-vim.g.shiftwidth = 2
-vim.g.softtabstop = 2
-vim.g.expandtab = true
-vim.g.autoindent = true
-vim.g.smartindent = true
-vim.g.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.tabstop = 2
+vim.opt.clipboard = 'unnamedplus'
+
+-- perfomance
+opt.redrawtime = 1500
+opt.timeoutlen = 250
+opt.ttimeoutlen = 10
+opt.updatetime = 100
+
+-- autocomplete
+opt.completeopt = { 'menu', 'menuone', 'noselect' }
+opt.shortmess = opt.shortmess + { c = true }
 
 -- Default grep command
 if fn.executable('rg') == 0 then
