@@ -14,6 +14,11 @@ function M.default_on_attach(client, bufnr)
     -- Mappings.
     local opts = { noremap=true, silent=true, buffer = bufnr }
 
+    -- Leader
+    vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>Trouble document_diagnostics<cr>",
+        {silent = true, noremap = true}
+    )
+
     keymap.set('n', 'gD', function() lsp.buf.declaration() end, opts)
     keymap.set('n', 'gd', function() lsp.buf.definition() end, opts)
     keymap.set('n', 'K', function() lsp.buf.hover() end, opts)
