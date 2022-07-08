@@ -69,11 +69,24 @@ lsputils.clients['gopls'].setup {
 }
 
 
-lsputils.clients['tsserver'].setup {
-    on_attach = function(client, bufnr)
-        lsputils.default_on_attach(client, bufnr)
-    end
-}
+require("typescript").setup({
+    disable_commands = false,
+    debug = false,
+    server = {
+        on_attach = function(client, bufnr)
+            lsputils.default_on_attach(client, bufnr)
+            keymap.set(
+                'n', '<Leader>oi', '<cmd>TypescriptOrganizeImports<CR>',
+                { silent = true, buffer = bufnr }
+            )
+            keymap.set(
+                'n', '<Leader>un', '<cmd>TypescriptRemoveUnused<CR>',
+                { silent = true, buffer = bufnr }
+            )
+
+        end
+    },
+})
 
 lsputils.clients['solidity_ls'].setup {}
 
