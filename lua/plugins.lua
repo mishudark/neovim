@@ -10,7 +10,7 @@ packer.init {
 }
 
 -- Tree navigation
-use 'luukvbaal/nnn.nvim'
+use 'kyazdani42/nvim-tree.lua'
 
 -- Neovim package manager
 use 'wbthomason/packer.nvim'

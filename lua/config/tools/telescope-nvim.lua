@@ -57,11 +57,7 @@ require('telescope').setup {
             }
 
         },
-        file_browser = {
-            theme = "ivy",
-            -- disables netrw and use telescope-file-browser in its place
-            hijack_netrw = true,
-        }
+
     }
 }
 
@@ -69,7 +65,6 @@ require('telescope').setup {
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('projects')
 require("telescope").load_extension("ui-select")
-require("telescope").load_extension("file_browser")
 
 local bind_picker = require('config.tools.telescope-nvim-utils').bind_picker
 
@@ -80,4 +75,3 @@ bind_picker('<Leader>fb', 'buffers')
 bind_picker('<Leader>fh', 'help_tags')
 bind_picker('<Leader>ft', 'treesitter')
 bind_picker('<Leader>fo', 'oldfiles')
-bind_picker('<Leader>,d', 'file_browser', 'file_browser')

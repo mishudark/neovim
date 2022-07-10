@@ -3,7 +3,7 @@ require('config.utility.tree-sitter-context')
 require('config.utility.nvim-cmp')
 require('config.utility.project-nvim')
 require('config.utility.kommentary')
-require('config.utility.nnn-config')
+require('config.utility.nvimtree-config')
 require('config.utility.tmux')
 require('config.utility.pomodoro')
 

@@ -89,4 +89,3 @@ require("typescript").setup({
 })
 
 lsputils.clients['solidity_ls'].setup {}
-
