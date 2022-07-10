@@ -19,6 +19,9 @@ function M.default_on_attach(client, bufnr)
         {silent = true, noremap = true}
     )
 
+
+    keymap.set('n', '<Leader>ca', function() lsp.buf.code_action() end, opts)
+
     keymap.set('n', 'gD', function() lsp.buf.declaration() end, opts)
     keymap.set('n', 'gd', function() lsp.buf.definition() end, opts)
     keymap.set('n', 'K', function() lsp.buf.hover() end, opts)
@@ -60,6 +63,8 @@ function M.default_on_attach(client, bufnr)
 
     -- Code actions
     keymap.set('n', '<Leader>ca', lsp.buf.code_action, opts)
+    keymap.set('n', '<leader>gf', '<cmd>lua vim.lsp.buf.format { async = true }<cr>')
+
 
     if client.supports_method('textDocument/formatting') then
         keymap.set("n", "<space>lf", function() lsp.buf.format() end, opts)

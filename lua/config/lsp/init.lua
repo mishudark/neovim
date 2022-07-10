@@ -87,3 +87,4 @@ require("nvim-lsp-installer").setup {
 -- Load client configurations
 require('config.lsp.clients')
 require('config.lsp.trouble')
+require('config.lsp.nullls')

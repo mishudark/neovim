@@ -49,6 +49,7 @@ use 'neovim/nvim-lspconfig'
 use 'williamboman/nvim-lsp-installer'
 use 'folke/trouble.nvim'
 use 'jose-elias-alvarez/typescript.nvim'
+use 'jose-elias-alvarez/null-ls.nvim'
 
 -- Go
 use 'fatih/vim-go'
