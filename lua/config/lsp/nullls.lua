@@ -9,5 +9,6 @@ require('null-ls').setup{
         },
     }),
     null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.google_java_format,
     null_ls.builtins.code_actions.gitsigns,
 }
