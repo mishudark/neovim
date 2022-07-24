@@ -20,7 +20,6 @@ function M.default_on_attach(client, bufnr)
     )
 
 
-    keymap.set('n', '<Leader>ca', function() lsp.buf.code_action() end, opts)
 
     keymap.set('n', 'gD', function() lsp.buf.declaration() end, opts)
     keymap.set('n', 'gd', function() lsp.buf.definition() end, opts)
@@ -40,7 +39,8 @@ function M.default_on_attach(client, bufnr)
         opts
     )
     keymap.set('n', '<Leader>lt', function() lsp.buf.type_definition() end, opts)
-    keymap.set('n', '<Leader>r', function() lsp.buf.rename() end, opts)
+    keymap.set('n', '<Leader>r', function() require("cosmic-ui").rename() end, opts)
+    keymap.set('n', '<Leader>ca', function() require("cosmic-ui").range_code_actions() end, opts)
     keymap.set('n', '<C-Space>',
         function() diagnostic.open_float() end,
         opts
@@ -62,7 +62,6 @@ function M.default_on_attach(client, bufnr)
     buf_bind_picker('<Leader>ld', 'diagnostics')
 
     -- Code actions
-    keymap.set('n', '<Leader>ca', lsp.buf.code_action, opts)
     keymap.set('n', '<leader>gf', '<cmd>lua vim.lsp.buf.format { async = true }<cr>')
 
 
