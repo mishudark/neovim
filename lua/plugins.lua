@@ -50,6 +50,7 @@ use 'williamboman/nvim-lsp-installer'
 use 'folke/trouble.nvim'
 use 'jose-elias-alvarez/typescript.nvim'
 use 'jose-elias-alvarez/null-ls.nvim'
+use 'Maan2003/lsp_lines.nvim'
 
 -- Go
 use 'fatih/vim-go'
