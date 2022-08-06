@@ -52,8 +52,9 @@ vim.lsp.protocol.CompletionItemKind = {
 }
 
 -- Setup LSP Installer
-require("nvim-lsp-installer").setup {
-    ensure_installed = { 'sumneko_lua', 'vimls', 'bashls' },
+require("mason").setup()
+require("mason-lspconfig").setup {
+    ensure_installed = { 'sumneko_lua', 'vimls', 'bashls', 'gopls' },
     ui = {
         icons = {
             server_installed = "✓",

@@ -40,7 +40,7 @@ function M.default_on_attach(client, bufnr)
     )
     keymap.set('n', '<Leader>lt', function() lsp.buf.type_definition() end, opts)
     keymap.set('n', '<Leader>r', function() require("cosmic-ui").rename() end, opts)
-    keymap.set('n', '<Leader>ca', function() require("cosmic-ui").range_code_actions() end, opts)
+    keymap.set('n', '<Leader>ca', function() require("cosmic-ui").code_actions() end, opts)
     keymap.set('n', '<C-Space>',
         function() diagnostic.open_float() end,
         opts

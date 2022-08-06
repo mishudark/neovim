@@ -46,7 +46,8 @@ use 'ahmedkhalf/project.nvim'
 
 -- LSP
 use 'neovim/nvim-lspconfig'
-use 'williamboman/nvim-lsp-installer'
+use 'williamboman/mason.nvim'
+use 'williamboman/mason-lspconfig.nvim'
 use 'folke/trouble.nvim'
 use 'jose-elias-alvarez/typescript.nvim'
 use 'jose-elias-alvarez/null-ls.nvim'
