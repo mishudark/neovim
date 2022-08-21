@@ -68,5 +68,5 @@ require("mason-lspconfig").setup {
 require('config.lsp.clients')
 require('config.lsp.trouble')
 require('config.lsp.nullls')
-require("lsp_lines").register_lsp_virtual_lines()
+require("lsp_lines").setup()
 require('cosmic-ui').setup()
