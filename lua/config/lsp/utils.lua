@@ -84,6 +84,11 @@ function M.default_on_attach(client, bufnr)
     buf_bind_picker('<Leader>lsw', 'lsp_workspace_symbols')
     buf_bind_picker('<Leader>lc', 'lsp_code_actions')
 
+    -- Cosmic UI
+    buf_set_keymap('n', '<Leader>lt', '<cmd>lua lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<Leader>r', '<cmd>lua require("cosmic-ui").rename()<CR>', opts)
+    buf_set_keymap('n', '<Leader>ca', '<cmd>lua require("cosmic-ui").code_actions()<CR>', opts)
+
     local keys = {
         l = {
             name = '+lsp',
@@ -120,7 +125,7 @@ function M.default_on_attach(client, bufnr)
     }
 
     if client.resolved_capabilities.document_formatting then
-        buf_set_keymap("n", "<space>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        buf_set_keymap("n", "<space>lf", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
 
         keys.l.f = 'Format'
 
