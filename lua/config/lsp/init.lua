@@ -1,6 +1,37 @@
 local lsp = vim.lsp
 local fn = vim.fn
 
+require'nvim-lightbulb'.update_lightbulb {
+    sign = {
+        enabled = true,
+        -- Priority of the gutter sign
+        priority = 20,
+    },
+    float = {
+        enabled = true,
+        -- Text to show in the popup float
+        text = "",
+        win_opts = {},
+    },
+    virtual_text = {
+        enabled = false,
+        -- Text to show at virtual text
+        text = "",
+    }
+}
+
+-- Change Lightbulb sign
+vim.fn.sign_define('LightBulbSign', { text = "" })
+
+require('utils').create_augroup2({
+    {'CursorHold,CursorHoldI', '*', 'lua require("nvim-lightbulb").update_lightbulb()'}
+}, 'nvim-lightbulb')
+
+require('symbols-outline').setup {
+    highlight_hovered_item = true,
+    show_guides = true,
+}
+
 -- Make LSP floating windows have borders
 lsp.handlers["textDocument/hover"] = lsp.with(
     lsp.handlers.hover,

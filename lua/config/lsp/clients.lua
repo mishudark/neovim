@@ -63,9 +63,6 @@ lsputils.clients['pyright'].setup {
 lsputils.clients['bashls'].setup {}
 
 lsputils.clients['gopls'].setup {
-    on_attach = function(client, bufnr)
-        lsputils.default_on_attach(client, bufnr)
-    end
 }
 
 

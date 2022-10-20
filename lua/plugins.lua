@@ -53,6 +53,13 @@ use 'jose-elias-alvarez/typescript.nvim'
 use 'jose-elias-alvarez/null-ls.nvim'
 use 'Maan2003/lsp_lines.nvim'
 use 'CosmicNvim/cosmic-ui'
+use 'ray-x/lsp_signature.nvim' -- Signature Help
+use 'kosayoda/nvim-lightbulb' -- Lightbulb on Code Action
+use 'simrat39/symbols-outline.nvim' -- Symbols list
+use 'onsails/lspkind-nvim' -- LSP Completion Item Icons
+
+-- Format
+use 'sbdchd/neoformat'
 
 -- Go
 use 'fatih/vim-go'
@@ -78,12 +85,13 @@ use 'hrsh7th/nvim-cmp'
 use 'hrsh7th/cmp-path'
 use 'hrsh7th/cmp-nvim-lsp'
 use 'hrsh7th/cmp-nvim-lua'
+use 'folke/which-key.nvim'
 
 -- Tresitter
+use 'SmiteshP/nvim-navic'
 use 'nvim-treesitter/nvim-treesitter'
 use 'nvim-treesitter/nvim-treesitter-context'
 use 'nvim-treesitter/nvim-treesitter-textobjects'
-use 'SmiteshP/nvim-gps'
 use 'windwp/nvim-ts-autotag'
 
 -- Org

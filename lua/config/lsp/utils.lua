@@ -1,7 +1,5 @@
-local lsp = vim.lsp
-local diagnostic = vim.diagnostic
-local keymap = vim.keymap
 local lspconfig = require('lspconfig')
+local wk = require('which-key')
 local utils = require('utils')
 
 local M = {}
@@ -9,86 +7,177 @@ local M = {}
 -- Utilities to help configuring LSP servers
 -- Default on_attach for LSP servers
 function M.default_on_attach(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
-    local opts = { noremap=true, silent=true, buffer = bufnr }
+    local opts = { noremap=true, silent=true }
 
-    -- Leader
+
     vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>Trouble document_diagnostics<cr>",
         {silent = true, noremap = true}
     )
 
+    buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<Leader>lwa',
+        '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',
+        opts
+    )
+    buf_set_keymap('n', '<Leader>lwr',
+        '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>',
+        opts
+    )
+    buf_set_keymap('n', '<Leader>lwl',
+        '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
+        opts
+    )
+    buf_set_keymap('n', '<Leader>lD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<Leader>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<Leader>lds',
+        '<cmd>lua vim.diagnostic.open_float({ nil, { focus = "false" }})<CR>',
+        opts
+    )
+    buf_set_keymap('n', '<Leader>ldd',
+        '<cmd>lua vim.diagnostic.setloclist({ nil, { focus = "false" }})<CR>',
+        opts
+    )
+    buf_set_keymap('n', '<Leader>ldw',
+        '<cmd>lua vim.diagnostic.setqflist({ nil, { focus = "false" }})<CR>',
+        opts
+    )
+    buf_set_keymap('n', ']g',
+        '<cmd>lua vim.diagnostic.goto_next({ popup_opts = { border = "single" }})<CR>',
+        opts
+    )
+    buf_set_keymap('n', '[g',
+        '<cmd>lua vim.diagnostic.goto_prev({ popup_opts = { border = "single" }})<CR>',
+        opts
+    )
+    buf_set_keymap('n', '<Leader>ldn', ']g', { silent = true })
+    buf_set_keymap('n', '<Leader>ldp', '[g', { silent = true })
 
+    buf_set_keymap('n', '<Leader>lt', '<cmd>SymbolsOutline<CR>', opts)
 
-    keymap.set('n', 'gD', function() lsp.buf.declaration() end, opts)
-    keymap.set('n', 'gd', function() lsp.buf.definition() end, opts)
-    keymap.set('n', 'K', function() lsp.buf.hover() end, opts)
-    keymap.set('n', 'gi', function() lsp.buf.implementation() end, opts)
-    keymap.set('n', 'gr', function() lsp.buf.references() end, opts)
-    keymap.set('n', '<Leader>wa',
-        function() lsp.buf.add_workspace_folder() end,
-        opts
-    )
-    keymap.set('n', '<Leader>wr',
-        function() lsp.buf.remove_workspace_folder() end,
-        opts
-    )
-    keymap.set('n', '<Leader>wl',
-        function() print(vim.inspect(lsp.buf.list_workspace_folders())) end,
-        opts
-    )
-    keymap.set('n', '<Leader>lt', function() lsp.buf.type_definition() end, opts)
-    keymap.set('n', '<Leader>r', function() require("cosmic-ui").rename() end, opts)
-    keymap.set('n', '<Leader>ca', function() require("cosmic-ui").code_actions() end, opts)
-    keymap.set('n', '<C-Space>',
-        function() diagnostic.open_float() end,
-        opts
-    )
-    keymap.set('n', ']g',
-        function() diagnostic.goto_next() end,
-        opts
-    )
-    keymap.set('n', '[g',
-        function() diagnostic.goto_prev() end,
-        opts
-    )
+    wk.register({
+        g = {
+            D = "Declaration",
+            d = "Definition",
+            i = "Implementation",
+            r = "References"
+        },
+        ["]"] = { g = "Next diagnostic" },
+        ["["] = { g = "Previous diagnostic" }
+    }, { buffer = bufnr })
 
     local function buf_bind_picker(...)
-        require('config.tools.telescope-nvim-utils').buf_bind_picker(bufnr, ...)
+        require('utils').buf_bind_picker(bufnr, ...)
     end
 
-    -- Telescope LSP bindings
-    buf_bind_picker('<Leader>ld', 'diagnostics')
+    -- Telescope LSP
+    buf_bind_picker('<Leader>lsd', 'lsp_document_symbols')
+    buf_bind_picker('<Leader>lsw', 'lsp_workspace_symbols')
+    buf_bind_picker('<Leader>lc', 'lsp_code_actions')
 
-    -- Code actions
-    keymap.set('n', '<leader>gf', '<cmd>lua vim.lsp.buf.format { async = true }<cr>')
+    local keys = {
+        l = {
+            name = '+lsp',
+            s = {
+                name = '+symbols',
+                d = 'Document Symbols',
+                w = 'Workspace Symbols'
+            },
+            d = {
+                name = '+diagnostics',
+                s = 'Show line diagnostics',
+                p = 'Goto prev',
+                n = 'Goto next',
+                d = 'loclist',
+                w = 'qflist'
+            },
+            c = 'Code Actions',
+            w = {
+                name = '+workspace',
+                a = 'Add workspace folder',
+                r = 'Remove workspace folder',
+                l = 'List workspace folders'
+            },
+            D = 'Type definition',
+            r = 'Rename',
+            t = 'Tags'
+        }
+    }
 
+    local visual_keys = {
+        l = {
+            name = '+lsp'
+        }
+    }
 
-    if client.supports_method('textDocument/formatting') then
-        keymap.set("n", "<space>lf", function() lsp.buf.format() end, opts)
-    elseif client.supports_method('textDocument/rangeFormatting') then
-        keymap.set(
+    if client.resolved_capabilities.document_formatting then
+        buf_set_keymap("n", "<space>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+        keys.l.f = 'Format'
+
+        if client.resolved_capabilities.document_range_formatting then
+            buf_set_keymap('v', '<space>lF',
+                ':lua vim.lsp.buf.range_formatting()<CR>',
+                opts
+            )
+
+            visual_keys.l.F = 'Range Format'
+        end
+
+    elseif client.resolved_capabilities.document_range_formatting then
+        buf_set_keymap(
             'n', '<space>lf',
-            function() lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 }) end,
+            '<cmd>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<CR>',
             opts
         )
+        buf_set_keymap('v', '<space>lF',
+            ':lua vim.lsp.buf.range_formatting()<CR>',
+            opts
+        )
+
+        keys.l.f = 'Format'
+        visual_keys.l.F = 'Range Format'
     end
 
-    if client.supports_method('textDocument/rangeFormatting') then
-        keymap.set('v', '<space>lF', function() vim.lsp.buf.range_formatting() end, opts)
-    end
+    wk.register(keys, { prefix = '<leader>', buffer = bufnr })
+    wk.register(visual_keys, { prefix = '<leader>', mode = 'v', buffer = bufnr })
+
+    -- LSP Signatures
+    require('lsp_signature').setup({
+        bind = true,
+        floating_window = false,
+        hint_enable = true,
+        hint_prefix = "🐼 ",
+        hint_scheme = "String",
+        use_lspsaga = false,
+        hi_parameter = "Search",
+        handler_opts = {
+            border = "rounded"
+        },
+    })
+
+    vim.schedule(function()
+        require("lsp_signature").on_attach()
+    end)
 end
 
 -- Default capabilities for LSP servers
 function M.default_capabilities()
-    local capabilities = lsp.protocol.make_client_capabilities()
-
-    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     return capabilities
 end
-
 
 -- Default config for LSP servers
 function M.default_config()
@@ -98,24 +187,35 @@ function M.default_config()
     }
 end
 
+-- Utility function to add bindings along with whichkey configuration to buffer
+function M.client_add_binds(bufnr, binds, wk_labels, wk_config)
+    local function buf_set_keymap(...)
+        vim.api.nvim_buf_set_keymap(bufnr, ...)
+    end
+
+    for _, bind in ipairs(binds) do
+        buf_set_keymap(unpack(bind))
+    end
+
+    wk_config['buffer'] = bufnr
+
+    if wk_labels then wk.register(wk_labels, wk_config) end
+end
+
 -- Function to add formatting on save to an LSP client
 function M.format_on_save(client)
-    if client.supports_method('textDocument/formatting') then
-        utils.create_buf_augroup({
+    if client.resolved_capabilities.document_formatting then
+        utils.create_buf_augroup2({
             {
-                event = 'BufWritePre',
-                opts = { callback = function() lsp.buf.format() end }
+                'BufWritePre',
+                'lua vim.lsp.buf.formatting_sync(nil, 1000)'
             }
         }, 'lsp_auto_format')
-    elseif client.supports_method('textDocument/rangeFormatting') then
-        utils.create_buf_augroup({
+    elseif client.resolved_capabilities.document_range_formatting then
+        utils.create_buf_augroup2({
             {
-                event = 'BufWritePre',
-                opts = {
-                    callback = function()
-                        lsp.buf.range_formatting({}, {0, 0}, { vim.fn.line("$"), 0 })
-                    end
-                }
+                'BufWritePre',
+                'lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})'
             }
         }, 'lsp_auto_format')
     end

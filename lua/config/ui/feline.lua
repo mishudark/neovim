@@ -3,9 +3,9 @@ local api = vim.api
 local vi_mode = require('feline.providers.vi_mode')
 local git = require('feline.providers.git')
 local lsp = require('feline.providers.lsp')
-local gps = require('nvim-gps')
+local navic = require('nvim-navic')
 
-gps.setup()
+navic.setup()
 
 local components = { active = {}, inactive = {} }
 
@@ -65,10 +65,10 @@ components.active[1] = {
     },
     {
         enabled = function()
-            return gps.is_available()
+            return navic.is_available()
         end,
         provider = function()
-            return gps.get_location()
+            return navic.get_location()
         end,
         hl = {
             fg = 'white',

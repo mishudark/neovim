@@ -2,17 +2,14 @@
 require('nvim-treesitter.configs').setup {
     ensure_installed = {
         'css',
-        'norg',
         'go',
         'java',
         'python',
-        'rust',
         'bash',
         'lua',
         'javascript',
         'typescript',
         'tsx',
-        'solidity',
     },
     autotag = {
         enable = true
