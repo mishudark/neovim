@@ -124,12 +124,12 @@ function M.default_on_attach(client, bufnr)
         }
     }
 
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.document_formatting then
         buf_set_keymap("n", "<space>lf", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
 
         keys.l.f = 'Format'
 
-        if client.resolved_capabilities.document_range_formatting then
+        if client.server_capabilities.document_range_formatting then
             buf_set_keymap('v', '<space>lF',
                 ':lua vim.lsp.buf.range_formatting()<CR>',
                 opts
@@ -138,7 +138,7 @@ function M.default_on_attach(client, bufnr)
             visual_keys.l.F = 'Range Format'
         end
 
-    elseif client.resolved_capabilities.document_range_formatting then
+    elseif client.server_capabilities.document_range_formatting then
         buf_set_keymap(
             'n', '<space>lf',
             '<cmd>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<CR>',
