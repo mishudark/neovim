@@ -100,6 +100,12 @@ use {
     requires = 'MunifTanjim/nui.nvim',
 }
 
+use {
+  'phaazon/mind.nvim',
+  branch = 'v2.2',
+  requires = { 'nvim-lua/plenary.nvim' },
+}
+
 -- Tools
 use { 'feline-nvim/feline.nvim', requires = 'kyazdani42/nvim-web-devicons' }
 use 'famiu/bufdelete.nvim'
