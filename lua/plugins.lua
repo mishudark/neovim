@@ -51,7 +51,6 @@ use 'williamboman/mason-lspconfig.nvim'
 use 'folke/trouble.nvim'
 use 'jose-elias-alvarez/typescript.nvim'
 use 'jose-elias-alvarez/null-ls.nvim'
-use 'Maan2003/lsp_lines.nvim'
 use 'CosmicNvim/cosmic-ui'
 use 'ray-x/lsp_signature.nvim' -- Signature Help
 use 'kosayoda/nvim-lightbulb' -- Lightbulb on Code Action

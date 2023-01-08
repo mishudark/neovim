@@ -45,7 +45,7 @@ lsp.handlers["textDocument/signatureHelp"] = lsp.with(
 
 -- Diagnostics configuration
 vim.diagnostic.config {
-    virtual_text = false,
+    virtual_text = true,
 }
 
 -- Diagnostic Signs
@@ -84,6 +84,7 @@ vim.lsp.protocol.CompletionItemKind = {
 
 -- Setup LSP Installer
 require("mason").setup()
+
 require("mason-lspconfig").setup {
     ensure_installed = { 'sumneko_lua', 'vimls', 'bashls', 'gopls' },
     ui = {
@@ -99,5 +100,4 @@ require("mason-lspconfig").setup {
 require('config.lsp.clients')
 require('config.lsp.trouble')
 require('config.lsp.nullls')
-require("lsp_lines").setup()
 require('cosmic-ui').setup()
