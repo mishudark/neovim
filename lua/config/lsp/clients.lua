@@ -70,6 +70,12 @@ require("typescript").setup({
     disable_commands = false,
     debug = false,
     server = {
+        init_options = {
+            hostInfo = 'neovim',
+            preferences = {
+                includeCompletionsForModuleExports = false
+            },
+        },
         on_attach = function(client, bufnr)
             lsputils.default_on_attach(client, bufnr)
             keymap.set(
